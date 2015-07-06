@@ -11,7 +11,17 @@ CParentDraw::~CParentDraw()
 
 }
 
-BOOL CParentDraw::_InitParentDraw(int pixel, COLORREF color, HWND hwnd, HDC hdc)
+BOOL CParentDraw::_InitParentDraw(
+                                  int pixel
+                                  , COLORREF color
+                                  , HWND hwnd, HDC hdc
+                                  , int startx
+                                  , int starty
+                                  , int endx
+                                  , int endy
+                                  , BOOL stack_flag
+                                  , CString text
+                                  )
 {  
     bool returnvalue = TRUE;
 
@@ -35,59 +45,15 @@ BOOL CParentDraw::_InitParentDraw(int pixel, COLORREF color, HWND hwnd, HDC hdc)
 
     m_nPixel = pixel;
     m_Color = color;
+    m_nStartx = startx;
+    m_nStarty = starty;
+    m_nEndx = endx;
+    m_nEndy = endy;
+    m_bStack_flag = stack_flag;
+    m_lpString = text;
     _SetPenAndBrush();
     return 0;
 }
-
-HWND CParentDraw::_GetHwnd()
-{
-    return m_Hwnd;
-}
-
-HDC CParentDraw::_GetDc()
-{
-    return m_Hdc;
-}
-
-COLORREF CParentDraw::_GetColor()
-{
-   return m_Color;
-}
-
-int CParentDraw::_GetPixel()
-{
-     return m_nPixel;
-}
-
-HPEN CParentDraw::_GetPen()
-{
-    return m_hPen;
-}
-
-HGDIOBJ CParentDraw::_GetBrush()
-{
-    return m_hBrush;
-}
-
-//BOOL CParentDraw::_SetColor(COLORREF color)
-//{
-//     m_Color = color;
-//     _SetPenAndBrush();
-//     return TRUE;
-//}
-//
-//BOOL CParentDraw::_SetPixel(int num)
-//{
-//     m_nPixel += num;
-//     
-//     if (m_nPixel < 1)
-//     {
-//         m_nPixel = 1;
-//     }
-//     
-//     _SetPenAndBrush();
-//     return TRUE;
-//}
 
 BOOL CParentDraw::_SetPenAndBrush()
 {
@@ -99,16 +65,15 @@ BOOL CParentDraw::_SetPenAndBrush()
 BOOL CParentDraw::IsSaveDc(BOOL saveflag, Paint_Struct temp_struct)
 {
     bool returnvalue = TRUE;
-    m_pPublicResource = CPublicResourceManager::GetInstance();
 
-    if (m_pPublicResource == NULL)
+    if (CPublicResourceManager::GetInstance() == NULL)
     {
         returnvalue = FALSE;
     }
 
-    if (DROW == saveflag && m_pPublicResource != NULL)
+    if (DROW == saveflag && CPublicResourceManager::GetInstance() != NULL)
     {
-        m_pPublicResource->_PushDCToBackStack(temp_struct);
+        CPublicResourceManager::GetInstance()->_PushDCToBackStack(temp_struct);
     }
     else
     {

@@ -2,6 +2,7 @@
 #include "MainFrm.h"
 #include "resource.h"
 #include "AboutDlg.h"
+#include "DrawManager.h"
 
 LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
@@ -23,9 +24,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     ATLASSERT(pLoop != NULL);
     pLoop->AddMessageFilter(this);
     pLoop->AddIdleHandler(this);
-
-    m_view.InitMembers();
-
+    m_view.InitManagerMembers();
     return 0;
 }
 
@@ -84,32 +83,32 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 
 LRESULT CMainFrame::OnDrawLine(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-      m_view.SetDrawType(DRAW_LINE);
-      return 0;
+   CDrawManager::GetInstance()->SetDrawType(DRAW_LINE);
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawRect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-     m_view.SetDrawType(DRAW_RECT);
-     return 0;
+    CDrawManager::GetInstance()->SetDrawType(DRAW_RECT);
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawCircle(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    m_view.SetDrawType(DRAW_CIRCLE);
+    CDrawManager::GetInstance()->SetDrawType(DRAW_CIRCLE);
     return 0;
 }
 
 LRESULT CMainFrame::OnDrawAdd(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-        m_view.SetPixel(1);
-        return 0;
+    CDrawManager::GetInstance()->SetPixel(1);
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawReduce(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-       m_view.SetPixel(-1);
-       return 0;
+    CDrawManager::GetInstance()->SetPixel(-1);
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawColor(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
@@ -120,50 +119,50 @@ LRESULT CMainFrame::OnDrawColor(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndC
     if(IDOK == ColorDlg.DoModal())
     {
         crColor = ColorDlg.m_cc.rgbResult;
-        m_view.SetColor(crColor);
+        CDrawManager::GetInstance()->SetColor(crColor);
     }
     return 0;
-      return 0;
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawBack(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-   m_view.Replay();
-   return 0;
+    CDrawManager::GetInstance()->Replay();
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawFront(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-   m_view.Front();
-   return 0;
+    CDrawManager::GetInstance()->Front();
+    return 0;
 }
 
 LRESULT CMainFrame::OnDrawArrow(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    m_view.SetDrawType(DRAW_ARROW);
+    CDrawManager::GetInstance()->SetDrawType(DRAW_ARROW);
     return 0;
 }
 
 LRESULT CMainFrame::OnDrawPen(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    m_view.SetDrawType(DRAW_PEN);
+    CDrawManager::GetInstance()->SetDrawType(DRAW_PEN);
     return 0;
 }
 
 LRESULT CMainFrame::OnDrawText(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    m_view.SetDrawType(DRAW_TEXT);
+    CDrawManager::GetInstance()->SetDrawType(DRAW_TEXT);
     return 0;
 }
 
 LRESULT CMainFrame::OnSaveFile(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    m_view.SaveFile();
+    CDrawManager::GetInstance()->SaveFile();
     return 0;
 }
 
 LRESULT CMainFrame::OnDrawErasr(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    m_view.SetDrawType(DRAW_CLEAR);
+    CDrawManager::GetInstance()->SetDrawType(DRAW_CLEAR);
     return 0;
-}                                                                
+}

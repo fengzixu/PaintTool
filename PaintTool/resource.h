@@ -19,8 +19,8 @@
 #define DRAW_COLOR                      12
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
-#define IDC_ERRSOR_CURSOR               201
 #define IDC_CURSOR1                     201
+#define IDC_ERRSOR_CURSOR               201
 #define ID_BUTTON32775                  32775
 #define ID_DRAW_RECT                    32779
 #define ID_DRAW_CIRCLE                  32780

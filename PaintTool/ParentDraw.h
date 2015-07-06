@@ -2,32 +2,42 @@
 #define __PARENT_DRAW_H
 #include "resource.h"
 #include "PublicResourceManager.h"
+#include <GdiPlus.h>
+#include <atlstr.h>
+using namespace Gdiplus;
 class CParentDraw
 {
-public :
+public:
     CParentDraw();
     ~CParentDraw();
-    HWND _GetHwnd();
-    HDC  _GetDc();
-    COLORREF _GetColor();
-    int _GetPixel();
-    HPEN _GetPen();
-    HGDIOBJ _GetBrush();
-    //BOOL _SetColor(COLORREF color);
-    //BOOL _SetPixel(int num);
     BOOL _SetPenAndBrush();
-    BOOL _InitParentDraw(int pixel, COLORREF color, HWND hwnd, HDC hdc);
-    BOOL PaintLast();
+    BOOL _InitParentDraw(
+          int pixel
+        , COLORREF color
+        , HWND hwnd, HDC hdc
+        , int startx
+        , int starty
+        , int endx
+        , int endy
+        , BOOL stack_flag
+        , CString text = L""
+        );
     BOOL IsSaveDc(BOOL saveflag, Paint_Struct temp_struct);
-private:
+    virtual BOOL Draw() = 0;
+
+protected:
     HWND m_Hwnd;
     HDC m_Hdc;
     HPEN m_hPen;
     HGDIOBJ m_hBrush;
-    int m_nPixel;
     COLORREF m_Color;
-    CPublicResourceManager* m_pPublicResource;
-
+    int m_nPixel;
+    int m_nStartx;
+    int m_nEndx;
+    int m_nStarty;
+    int m_nEndy;
+    BOOL m_bStack_flag;
+    LPCTSTR m_lpString;
 };
 
 #endif

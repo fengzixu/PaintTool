@@ -206,15 +206,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DrawCurve.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DrawErasr.cpp"
+				RelativePath=".\DrawErase.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\DrawLine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DrawManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DrawPen.cpp"
 				>
 			</File>
 			<File
@@ -283,15 +287,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DrawCurve.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DrawErasr.h"
+				RelativePath=".\DrawErase.h"
 				>
 			</File>
 			<File
 				RelativePath=".\DrawLine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DrawManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DrawPen.h"
 				>
 			</File>
 			<File

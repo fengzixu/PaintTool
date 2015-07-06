@@ -3,11 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <atlstr.h>
-#include "PublicResourceManager.h"
-#include <GdiPlus.h>
-using namespace Gdiplus;
-
+#include "DrawManager.h"
 class CPaintToolView : public CWindowImpl<CPaintToolView>
 {
 public:
@@ -33,47 +29,11 @@ public:
     LRESULT OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
     LRESULT OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
     LRESULT OnChar(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    BOOL InitManagerMembers();
     BOOL SetDrawType(int nType);
-    BOOL Draw(int draw_type);
-    BOOL InitMembers();
-    BOOL SetPixel(int num);
-    BOOL SetColor(COLORREF color);
-    BOOL PaintLast();
-    BOOL Replay();
-    BOOL Front();
-    BOOL SaveFile();
-    BOOL SaveBitmap(TCHAR* filepath);
-    BOOL CPaintToolView::WriteToFile
-        (
-          BITMAPFILEHEADER& hBitMapFile
-        , PBITMAPINFOHEADER& pbihBitMap
-        , LPTSTR& pszFile
-        , DWORD& dwTemp
-        , DWORD& dwTotal
-        , DWORD& dwCB
-        , BYTE* pbyByte
-        , LPBYTE lpBits
-        );
-    PBITMAPINFO CreateBitmapInfoStruct(HBITMAP hBmp);
+    BOOL Init();
 private:
-    int m_nDownX;
-    int m_nDownY;
-    int m_nMoveX;
-    int m_nMoveY;
-    int m_nUpX;
-    int m_nUpY;
-    int m_nDrawType;
-    int m_nIsMouseDown;
-    int m_nIsDrawText;
-    int m_nIsErasr;
-    int m_nIsPen;
-    HWND m_temp_hwnd;
-    HDC m_temp_dc;
-    LPCTSTR lpString;
-    CString m_cstrText;
-    COLORREF m_Color;
     BOOL m_bPaintflag;
-    int m_nPixel;
-    BOOL m_bCurveflag;
-    CPublicResourceManager* m_PublicResourceManager;
+
+
 };
